@@ -50,3 +50,20 @@ document.querySelectorAll(".links a, .footer a").forEach(link => {
         link.style.outline = "none";
     });
 });
+
+document.querySelectorAll(".links a").forEach(link => {
+    link.addEventListener("click", event => {
+        // Captura o texto do link clicado
+        const linkText = event.target.textContent;
+        const linkURL = event.target.href;
+
+        // Envia o evento para o Google Analytics
+        gtag('event', 'click', {
+            'event_category': 'Links',
+            'event_label': linkText,
+            'value': linkURL
+        });
+
+        console.log(`Link clicado: ${linkText} (${linkURL})`);
+    });
+});
